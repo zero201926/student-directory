@@ -49,7 +49,5 @@ end
 
 students = input_students
 print_header()
-if students.select {|l| l.start_with?('D')}
-  print(students, letter)
-end
+print(students)
 print_footer(students)
