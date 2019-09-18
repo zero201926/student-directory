@@ -35,8 +35,12 @@ def print_header()
 end
 
 def print(students)
-  students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+  students.each_with_index do |student, index|
+    while student[:name].start_with?("B") == true && student[:name].length < 13
+      puts "#{index + 1}, #{student[:name]} (#{student[:cohort]} cohort)"
+    else
+      puts "their name doesnt start with a b or too long"
+    end
   end
 end
 
