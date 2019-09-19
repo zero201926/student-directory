@@ -28,11 +28,24 @@ def input_students
     puts "Now we have #{students.count} students"
     name= gets.chomp
     name = name.to_sym
+    if name.empty?
+      puts "Please enter a name. If you wish to finish the list, "
+      name = 'temp'
+      name = name.to_sym
+    end
+    if cohort.empty?
+      cohort = ('month').to_sym
+    end 
+
+
     cohort = gets.chomp
     cohort = cohort.to_sym
   end
 students
 end
+
+
+
 
 
 def print_header()
