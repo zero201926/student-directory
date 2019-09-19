@@ -8,7 +8,7 @@ students = [
 {name: "Michael Corleone", cohort: :november, hobbies: :golf},
 {name: "Alex Delarge", cohort: :november, hobbies: :golf},
 {name: "The Wicked Witch of the West", cohort: :november, hobbies: :golf},
-{name: "Terminator", cohort: :november, hobbies: :golf},
+{name: "berminator", cohort: :november, hobbies: :golf},
 {name: "Freddy Krueger", cohort: :november, hobbies: :golf},
 {name: "The Joker",  cohort: :november, hobbies: :golf},
 {name: "Joffrey Baratheon", cohort: :november, hobbies: :golf},
@@ -20,10 +20,16 @@ def input_students
   puts "To finish. just git return twice"
   students = []
   name = gets.chomp
-  while !name.empty? do
-    students << {name: name, cohort: :november, hobbies: :golf}
+  name = name.to_sym
+  cohort = gets.chomp
+  cohort = cohort.to_sym
+  while !name.empty? && !cohort.empty? do
+    students << {name: name, cohort: cohort, hobbies: :golf}
     puts "Now we have #{students.count} students"
-    name = gets.chomp
+    name= gets.chomp
+    name = name.to_sym
+    cohort = gets.chomp
+    cohort = cohort.to_sym
   end
 students
 end
@@ -36,9 +42,9 @@ end
 
 def print(students)
   students.each_with_index do |student, index|
-    while student[:name].start_with?("B") == true && student[:name].length < 13
+    #if student[:name].start_with?("b") == true && student[:name].length < 13
       puts "#{index + 1}, #{student[:name]} (#{student[:cohort]} cohort) #{student[:hobbies]}"
-    end
+  #  end
   end
 end
 
