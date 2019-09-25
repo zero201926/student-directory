@@ -1,5 +1,4 @@
 @students = []
-
 student_count = 11
 # first, we print the list of students
 # students = [
@@ -20,14 +19,14 @@ student_count = 11
 def input_students
   puts "Please enter the names of the students"
   puts "To finish. just git return twice"
-  name = gets.chomp
+  name = $stdin.gets.chomp
   name = name.to_sym
-  cohort = gets.chomp
+  cohort = $stdin.gets.chomp
   cohort = cohort.to_sym
   while !name.empty? && !cohort.empty? do
     @students << {name: name, cohort: cohort, hobbies: :golf}
     puts "Now we have #{@students.count} students"
-    name= gets.chomp
+    name = $stdin.gets.chomp
     name = name.to_sym
     if name.empty?
       puts "Please enter a name. If you wish to finish the list, "
@@ -37,7 +36,7 @@ def input_students
     if cohort.empty?
       cohort = ('month').to_sym
     end
-    cohort = gets.chomp
+    cohort = $stdin.gets.chomp
     cohort = cohort.to_sym
   end
 end
@@ -119,7 +118,7 @@ end
 def interatcive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    process($stdin.gets.chomp)
   end
 end
 
@@ -133,12 +132,26 @@ def save_students
   file.close
 end
 
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
     @students << {name: name, cohort: cohort.to_sym}
   end
   file.close
 end
-interatcive_menu()
+
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(filename)
+    puts "Loaded #{@students.count} from #{filename}"""
+  else
+    puts "Sorry, #{filename} doesn't exist."
+    exit
+  end
+end
+
+try_load_students
+interatcive_menu
+##complete
